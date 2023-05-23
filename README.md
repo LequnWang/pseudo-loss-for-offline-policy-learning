@@ -41,3 +41,13 @@ Run
 ```angular2html
 python ./scripts_discrete/model_selection.py
 ```
+
+### Generate figure and tables for the discrete-action experiments
+
+Run
+
+```angular2html
+python ./scripts_discrete/plot_improvement_figure.py
+python ./scripts_discrete/generate_table.py
+python ./scripts_discrete/transform_table.py
+```
