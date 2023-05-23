@@ -6,17 +6,17 @@ import os
 import sys
 import numpy as np
 sys.path.append(".")
-from params_exp_data_size import *
-from src.oracles import LinearRegressionCSOracle
+from exp_params import *
+from src.oracles import LinearRegressionCSCOracle
 
 
 
-def generate_random_cost(Y):
+def generate_real_cost(Y):
     num_classes_original = np.max(Y) + 1
-    num_classes = num_classes_original * TIMES_NUM_LABELS
+    num_classes = num_classes_original * TIMES_NUM_CLASSES
     cost_matrix = np.random.rand(num_classes_original, num_classes)
     for i in range(num_classes_original):
-        for j in range(TIMES_NUM_LABELS):
+        for j in range(TIMES_NUM_CLASSES):
             cost_matrix[i, num_classes_original * j + i] = 0.
     C = []
     for y in Y:
@@ -26,10 +26,10 @@ def generate_random_cost(Y):
 
 def generate_cost(Y):
     num_classes_original = np.max(Y) + 1
-    num_classes = num_classes_original * TIMES_NUM_LABELS
+    num_classes = num_classes_original * TIMES_NUM_CLASSES
     cost_matrix = np.ones((num_classes_original, num_classes))
     for i in range(num_classes_original):
-        for j in range(TIMES_NUM_LABELS):
+        for j in range(TIMES_NUM_CLASSES):
             cost_matrix[i, num_classes_original * j + i] = 0.
     C = []
     for y in Y:
@@ -47,8 +47,8 @@ def fetch_data(data_id, data_home, train_logging_policy_data_path, test_data_pat
 
     encoder = LabelEncoder()
     Y = encoder.fit_transform(Y)
-    if GENERATE_RANDOM_COST:
-        C = generate_random_cost(Y)
+    if GENERATE_REAL_COST:
+        C = generate_real_cost(Y)
     else:
         C = generate_cost(Y)
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
         simulate_bandit_feedback_data_path = os.path.join(exp_dir, data_name + ".simulate_bandit_feedback.pkl")
         X_log, C_log, X_test, C_test = fetch_data(data_id, exp_dir, train_logging_policy_data_path, test_data_path,
                                   simulate_bandit_feedback_data_path, train_logging_policy_data_size, test_proportion)
-        logging_policy = LinearRegressionCSOracle()
+        logging_policy = LinearRegressionCSCOracle(epochs=10)
         if TEST_BAD_POLICY:
             logging_policy.fit(X_log, 1. - C_log)
         else:

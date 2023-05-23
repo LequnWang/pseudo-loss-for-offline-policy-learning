@@ -1,0 +1,13 @@
+name: cb-learn
+channels:
+  - soumith
+  - defaults
+dependencies:
+  - python=3.9
+  - scikit-learn
+  - torchaudio
+  - pytorch
+  - cpuonly
+  - torchvision
+  - pandas
+  - matplotlib
