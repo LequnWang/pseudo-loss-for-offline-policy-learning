@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 
 # data and plot folders
-/data/
-/plots/
+data/
+plots/
 .idea/
