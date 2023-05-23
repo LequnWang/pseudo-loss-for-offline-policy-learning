@@ -131,3 +131,4 @@ dmypy.json
 # data and plot folders
 /data/
 /plots/
+.idea/
