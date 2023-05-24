@@ -40,24 +40,7 @@ for data_name in data_names:
         plot_stats[data_name][data_size]["improvements"] = improvements
 
 
-# fig = plt.figure(0)
 plot_path = "./plots/" + exp_token + "_improvement.pdf"
-
-# x = [str(data_size) for data_size in data_sizes]
-# for data_name in data_names:
-#     y_mean = []
-#     y_std = []
-#     for data_size in data_sizes:
-#         y_mean.append(np.mean(plot_stats[data_name][data_size]["improvements"]))
-#         y_std.append(np.std(plot_stats[data_name][data_size]["improvements"], ddof=1))
-#     plt.plot(x, y_mean, label=data_name)
-#     plt.legend()
-#     plt.xlabel("Data Size")
-#     plt.ylabel("Improvement")
-#     plt.tight_layout()
-#     plt.savefig(plot_path, format="jpeg", dpi=dpi)
-
-
 width = 0.2
 fig, ax = plt.subplots()
 X = np.arange(3)
