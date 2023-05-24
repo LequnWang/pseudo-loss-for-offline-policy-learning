@@ -167,41 +167,11 @@ def model_fitting_commands(exp_dir, data_names, data_sizes, max_data_size_for_EB
                     for beta in betas:
                         for k in ks:
                             for h in hs:
-                                model_identity_string_GBR = "_".join(
-                                    [data_name, str(data_size), str(estimator), str(run), str(beta), str(k), str(h)]
-                                )
-                                GBR_PL_model_path = os.path.join(exp_dir,
-                                                                 model_identity_string_GBR +"_GBR_PL_model.pkl")
-                                GBR_PL_result_path = os.path.join(exp_dir,
-                                                                  model_identity_string_GBR + "_GBR_PL_result.pkl")
-                                GBR_PL_command = "python ./scripts_continuous/train_GBRegressionCSOracle.py " \
-                                                 "--train_data_path {} " \
-                                                 "--valid_data_path {} " \
-                                                 "--test_data_path {} " \
-                                                 "--model_path {} " \
-                                                 "--result_path {} " \
-                                                 "--beta {} " \
-                                                 "--k {} " \
-                                                 "--h {} " \
-                                                 "--logging_policy_path {} ".format(
-                                    train_data_path,
-                                    valid_data_path,
-                                    test_data_path,
-                                    GBR_PL_model_path,
-                                    GBR_PL_result_path,
-                                    beta,
-                                    k,
-                                    h,
-                                    logging_policy_path
-                                )
-                                if "GBR" in oracles:
-                                    commands.append(GBR_PL_command)
-
                                 for weight_decay in weight_decays:
                                     model_identity_string = "_".join([data_name, str(data_size), str(estimator), str(run), str(beta), str(k), str(h), str(weight_decay)])
-                                    regression_PL_model_path = os.path.join(exp_dir, model_identity_string + "_regression_PL_model,pkl")
-                                    regression_PL_result_path = os.path.join(exp_dir, model_identity_string + "_regression_PL_result.pkl")
-                                    regression_PL_command = "python ./scripts_continuous/train_LinearRegressionCSOracle.py " \
+                                    LR_PL_model_path = os.path.join(exp_dir, model_identity_string + "_LR_PL_model,pkl")
+                                    LR_PL_result_path = os.path.join(exp_dir, model_identity_string + "_LR_PL_result.pkl")
+                                    LR_PL_command = "python ./scripts_continuous/train_LinearRegressionCSOracle.py " \
                                                            "--train_data_path {} " \
                                                            "--valid_data_path {} " \
                                                            "--test_data_path {} " \
@@ -215,20 +185,20 @@ def model_fitting_commands(exp_dir, data_names, data_sizes, max_data_size_for_EB
                                         train_data_path,
                                         valid_data_path,
                                         test_data_path,
-                                        regression_PL_model_path,
-                                        regression_PL_result_path,
+                                        LR_PL_model_path,
+                                        LR_PL_result_path,
                                         beta,
                                         weight_decay,
                                         k,
                                         h,
                                         logging_policy_path
                                     ) + " --lrs " + " ".join(lrs)
-                                    if "regression" in oracles:
-                                        commands.append(regression_PL_command)
+                                    if "LR" in oracles:
+                                        commands.append(LR_PL_command)
 
-                                    policy_PL_model_path = os.path.join(exp_dir, model_identity_string + "_policy_PL_model.pkl")
-                                    policy_PL_result_path = os.path.join(exp_dir, model_identity_string + "_policy_PL_result.pkl")
-                                    policy_PL_command = "python ./scripts_continuous/train_LinearSoftmaxCSOracle.py " \
+                                    PG_PL_model_path = os.path.join(exp_dir, model_identity_string + "_PG_PL_model.pkl")
+                                    PG_PL_result_path = os.path.join(exp_dir, model_identity_string + "_PG_PL_result.pkl")
+                                    PG_PL_command = "python ./scripts_continuous/train_LinearSoftmaxCSOracle.py " \
                                                            "--train_data_path {} " \
                                                            "--valid_data_path {} " \
                                                            "--test_data_path {} " \
@@ -242,22 +212,22 @@ def model_fitting_commands(exp_dir, data_names, data_sizes, max_data_size_for_EB
                                         train_data_path,
                                         valid_data_path,
                                         test_data_path,
-                                        policy_PL_model_path,
-                                        policy_PL_result_path,
+                                        PG_PL_model_path,
+                                        PG_PL_result_path,
                                         beta,
                                         weight_decay,
                                         k,
                                         h,
                                         logging_policy_path
                                     ) + " --lrs " + " ".join(lrs)
-                                    if "policy" in oracles:
-                                        commands.append(policy_PL_command)
+                                    if "PG" in oracles:
+                                        commands.append(PG_PL_command)
 
-                                    policy_EB_model_path = os.path.join(exp_dir,
-                                                                        model_identity_string + "_policy_EB_model.pkl")
-                                    policy_EB_result_path = os.path.join(exp_dir,
-                                                                         model_identity_string + "_policy_EB_result.pkl")
-                                    policy_EB_command = "python ./scripts_continuous/train_LinearSoftmaxEBOracle.py " \
+                                    PG_EB_model_path = os.path.join(exp_dir,
+                                                                        model_identity_string + "_PG_EB_model.pkl")
+                                    PG_EB_result_path = os.path.join(exp_dir,
+                                                                         model_identity_string + "_PG_EB_result.pkl")
+                                    PG_EB_command = "python ./scripts_continuous/train_LinearSoftmaxEBOracle.py " \
                                                         "--train_data_path {} " \
                                                         "--valid_data_path {} " \
                                                         "--test_data_path {} " \
@@ -271,16 +241,16 @@ def model_fitting_commands(exp_dir, data_names, data_sizes, max_data_size_for_EB
                                         train_data_path,
                                         valid_data_path,
                                         test_data_path,
-                                        policy_EB_model_path,
-                                        policy_EB_result_path,
+                                        PG_EB_model_path,
+                                        PG_EB_result_path,
                                         beta,
                                         weight_decay,
                                         k,
                                         h,
                                         logging_policy_path
                                     ) + " --lrs " + " ".join(lrs)
-                                    if "policy" in oracles and data_size <= max_data_size_for_EB:
-                                        commands.append(policy_EB_command)
+                                    if "PG" in oracles and data_size <= max_data_size_for_EB:
+                                        commands.append(PG_EB_command)
     return commands
 
 def submit_commands(token, exp_dir, split_size, commands, submit, shuffle):
