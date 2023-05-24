@@ -26,14 +26,14 @@ python ./scripts_discrete/prepare_data.py
 
 ### Simulate bandit feedback data for discrete-action experiments
 
-Run
+On a cluster with [Slurm](https://slurm.schedmd.com/documentation.html) workload manager, run
 ```angular2html
 python ./scripts_discrete/run_simulate_bandit_feedback.py
 ```
 
 ### Offline policy learning with different methods for the discrete-action experiments
 
-Run
+On a cluster with [Slurm](https://slurm.schedmd.com/documentation.html) workload manager, run
 ```angular2html
 python ./scripts_discrete/run_OPO.py
 ```
@@ -72,14 +72,14 @@ python ./scripts_continuous/prepare_data.py
 
 ### Simulate bandit feedback data for continuous-action experiments
 
-Run
+On a cluster with [Slurm](https://slurm.schedmd.com/documentation.html) workload manager, run
 ```angular2html
 python ./scripts_continuous/run_simulate_bandit_feedback.py
 ```
 
 ### Offline policy learning with different methods for the continuous-action experiments
 
-Run
+On a cluster with [Slurm](https://slurm.schedmd.com/documentation.html) workload manager, run
 ```angular2html
 python ./scripts_continuous/run_OPO.py
 ```

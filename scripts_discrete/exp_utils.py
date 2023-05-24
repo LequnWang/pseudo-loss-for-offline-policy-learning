@@ -167,7 +167,7 @@ def submit_commands(token, exp_dir, split_size, commands, submit, shuffle):
     scripts = [os.path.join(exp_dir, "scripts_{}_{}.sh".format(token, idx)) for idx in range(current_idx)]
     cnt = 0
     for script in scripts:
-        submission_command = "sbatch --partition=thorsten,default_partition --exclude=sablab-cpu-01,sablab-cpu-02,sablab-gpu-04,sablab-gpu-06,g2-cpu-11,g2-cpu-01,g2-cpu-07,g2-cpu-08,g2-cpu-27,luxlab-cpu-01 --requeue -N1 -n1 -c1 --mem=12G " \
+        submission_command = "sbatch --partition=default_partition --requeue -N1 -n1 -c1 --mem=12G " \
                              "-t 24:00:00 -J %s -o %s.o -e %s.e --wrap=\"sh %s\"" % (token + str(cnt), script,
                                                                                      script, script)
         cnt += 1

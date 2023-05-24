@@ -30,21 +30,16 @@ for data_size in data_sizes:
         for oracle in oracles:
             for estimator in estimators:
                 for confidence in confidences:
-                    if confidence == "EB" and oracle == "regression":
-                        continue
-                    if confidence == "EB" and oracle == "GBR":
+                    if confidence == "EB" and oracle == "LR":
                         continue
                     if confidence == "EB" and data_size > max_data_size_for_EB:
-                        print("NA")
                         continue
                     method_name = "_".join([oracle, estimator, confidence])
                     method_print_name = ""
-                    if oracle == "policy":
+                    if oracle == "PG":
                         method_print_name += "PG"
-                    elif oracle == "regression":
+                    elif oracle == "LR":
                         method_print_name += "LR"
-                    else:
-                        method_print_name += "GBR"
                     if estimator == "IPW":
                         method_print_name += "+IPW"
                     else:

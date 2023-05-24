@@ -28,4 +28,4 @@ betas = [0., 1e-3, 3e-3, 1e-2, 3e-2, 1e-1, 3e-1, 1.]
 lrs = [1e-3, 1e-2, 1e-1, 1., 10.]
 lrs = [str(lr) for lr in lrs]
 weight_decays = [1e-6]
-n_runs = 10
+n_runs = 50

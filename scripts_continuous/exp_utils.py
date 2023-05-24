@@ -171,7 +171,7 @@ def model_fitting_commands(exp_dir, data_names, data_sizes, max_data_size_for_EB
                                     model_identity_string = "_".join([data_name, str(data_size), str(estimator), str(run), str(beta), str(k), str(h), str(weight_decay)])
                                     LR_PL_model_path = os.path.join(exp_dir, model_identity_string + "_LR_PL_model,pkl")
                                     LR_PL_result_path = os.path.join(exp_dir, model_identity_string + "_LR_PL_result.pkl")
-                                    LR_PL_command = "python ./scripts_continuous/train_LinearRegressionCSOracle.py " \
+                                    LR_PL_command = "python ./scripts_continuous/train_LinearRegressionCSCOracle.py " \
                                                            "--train_data_path {} " \
                                                            "--valid_data_path {} " \
                                                            "--test_data_path {} " \
@@ -198,7 +198,7 @@ def model_fitting_commands(exp_dir, data_names, data_sizes, max_data_size_for_EB
 
                                     PG_PL_model_path = os.path.join(exp_dir, model_identity_string + "_PG_PL_model.pkl")
                                     PG_PL_result_path = os.path.join(exp_dir, model_identity_string + "_PG_PL_result.pkl")
-                                    PG_PL_command = "python ./scripts_continuous/train_LinearSoftmaxCSOracle.py " \
+                                    PG_PL_command = "python ./scripts_continuous/train_LinearSoftmaxCSCOracle.py " \
                                                            "--train_data_path {} " \
                                                            "--valid_data_path {} " \
                                                            "--test_data_path {} " \
@@ -278,7 +278,7 @@ def submit_commands(token, exp_dir, split_size, commands, submit, shuffle):
     scripts = [os.path.join(exp_dir, "scripts_{}_{}.sh".format(token, idx)) for idx in range(current_idx)]
     cnt = 0
     for script in scripts:
-        submission_command = "sbatch --partition=thorsten,default_partition --exclude=sablab-cpu-01,sablab-cpu-02,sablab-gpu-04,sablab-gpu-06,g2-cpu-11,g2-cpu-01,g2-cpu-07,g2-cpu-08,g2-cpu-03 --requeue -N1 -n1 -c1 --mem=8G " \
+        submission_command = "sbatch --partition=default_partition --requeue -N1 -n1 -c1 --mem=8G " \
                              "-t 24:00:00 -J %s -o %s.o -e %s.e --wrap=\"sh %s\"" % (token + str(cnt), script,
                                                                                      script, script)
         cnt += 1

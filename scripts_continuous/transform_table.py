@@ -26,8 +26,8 @@ for data_size in data_sizes:
             best_performance_indexes = None
             best_performance_oracle_estimator = {}
             best_performance_indexes_oracle_estimator = {}
-            for oracle in ["PG", "LR"]:
-                for estimator in ["IPW", "DR"]:
+            for oracle in oracles:
+                for estimator in estimators:
                     best_performance_oracle_estimator[oracle + "+" + estimator] = None
                     best_performance_indexes_oracle_estimator[oracle + "+" + estimator] = None
             for j in range(m):
@@ -46,8 +46,8 @@ for data_size in data_sizes:
                     best_performance_indexes_oracle_estimator[oracle_estimator].add(j)
             box_indexes.append(best_performance_indexes)
             bold_indexes.append(set())
-            for oracle in ["PG", "LR"]:
-                for estimator in ["IPW", "DR"]:
+            for oracle in oracles:
+                for estimator in estimators:
                     bold_indexes[-1] = bold_indexes[-1].union(best_performance_indexes_oracle_estimator[oracle + "+" + estimator])
 
     with open(transformed_table_path, 'w') as f:

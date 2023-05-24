@@ -31,28 +31,11 @@ for data_name in data_names:
                 if "None" in method_name:
                     if best_None is None or best_None > plot_stats[data_name][data_size][method_name][run]:
                         best_None = plot_stats[data_name][data_size][method_name][run]
-            print(data_name, data_size, run, best_PL, best_None, (best_None - best_PL) / best_None)
             improvements.append((best_None - best_PL) / best_None)
         plot_stats[data_name][data_size]["improvements"] = improvements
 
 
-# fig = plt.figure(0)
 plot_path = "./plots/" + exp_token + "_improvement.pdf"
-
-# x = [str(data_size) for data_size in data_sizes]
-# for data_name in data_names:
-#     y_mean = []
-#     y_std = []
-#     for data_size in data_sizes:
-#         y_mean.append(np.mean(plot_stats[data_name][data_size]["improvements"]))
-#         y_std.append(np.std(plot_stats[data_name][data_size]["improvements"], ddof=1))
-#     plt.plot(x, y_mean, label=data_name)
-#     plt.legend()
-#     plt.xlabel("Data Size")
-#     plt.ylabel("Improvement")
-#     plt.tight_layout()
-#     plt.savefig(plot_path, format="jpeg", dpi=dpi)
-
 
 width = 0.16
 fig, ax = plt.subplots()
@@ -66,7 +49,6 @@ for data_name in data_names:
         y_std_err.append(200 * np.std(plot_stats[data_name][data_size]["improvements"], ddof=1) / np.sqrt(len(plot_stats[data_name][data_size]["improvements"])))
     ax.bar(X + shift, y_mean, yerr=y_std_err, width=width, label=data_print_name[data_name])
     shift += width
-    print(y_mean)
 ax.legend()
 ax.set_xlabel("Data Size", fontsize=font_size)
 ax.set_ylabel("Improvement %", fontsize=font_size)
