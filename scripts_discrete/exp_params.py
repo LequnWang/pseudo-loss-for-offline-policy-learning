@@ -1,5 +1,5 @@
-exp_token = "d_eps0.1"
-exp_dir ="./exp_real_eps0.1"
+exp_token = "d_real_eps0.1"
+exp_dir ="./exp_d_real_eps0.1"
 split_size = 5000
 submit = True
 data_ids = [247, 261, 1183, 1214]
